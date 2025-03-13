@@ -1,0 +1,31 @@
+import {useState,useEffect} from "react";
+function App(){
+  const [showCounter, setShowCounter] = useState(false);
+  useEffect(function(){
+    setInterval(function(){
+      setShowCounter(c=>!c)
+    },5000);
+  },[])
+  return <div>
+    <b>
+      hi there
+    </b>
+  {showCounter && <Counter></Counter>}
+  </div>
+}
+// mounting
+function Counter(){
+  const [count,setCount]=useState(0);
+  console.log("counter"); //only logs when mounted 
+  useEffect(function(){
+    setInterval(function(){
+      console.log("clock") //runs even when de-mounted
+      setCount(count=>count+1);
+    },1000);
+  },[])
+  return <div>
+    <h1>{count}</h1>
+  </div>
+  
+}
+export default App
