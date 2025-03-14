@@ -1,0 +1,49 @@
+//WITHOUT PROPS
+import {useState,useEffect} from "react";
+function App(){
+  return <div>
+    <b>
+      hi there
+    </b>
+  <Counter></Counter>
+  </div>
+}
+// mounting
+function Counter(){
+  const [count,setCount]=useState(0);
+  useEffect(function(){
+    console.log("mount");
+    return function(){
+      console.log("unmount");
+    }
+  },[]);
+  return <div>
+    <h1>{count}</h1>
+  </div>
+}
+export default App
+
+//WITH PROPS
+import {useState,useEffect} from "react";
+export default function App(){
+  const [count,setCount]=useState(0);
+  return <div>
+    <b>
+      hi there
+    </b>
+  <Counter count={count}></Counter>
+  </div>
+}
+// mounting
+function Counter(props){
+  useEffect(function(){
+    console.log("mount");
+    return function(){
+      console.log("unmount");
+    }
+  },[]);
+  return <div>
+    <h1>{props.count}</h1>
+  </div>
+}
+
