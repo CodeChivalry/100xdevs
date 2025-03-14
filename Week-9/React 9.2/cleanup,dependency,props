@@ -1,0 +1,38 @@
+import {useState,useEffect} from "react";
+export default function App(){
+  const [count,setCount]=useState(0);
+  const [count2,setCount2]=useState(0);
+  function increase(){
+    setCount(count+1);
+  }
+  function decrease(){
+    setCount2(count2-1);
+  }
+  return <div>
+    <b>
+      hi there
+    </b>
+  <Counter count={count} count2={count2}></Counter>
+  <button onClick={increase}>Increase Count</button>
+  <button onClick={decrease}>Decrease Count</button>
+  </div>
+}
+// mounting
+function Counter(props){
+  useEffect(function(){
+    console.log("mount"); //called only once when component is mounted
+    return function(){
+      console.log("unmount"); //called only when component is unmounted
+    }
+  },[]);
+  useEffect(function(){
+    console.log("count has changed"); //called whenever count,count2 change
+    return function(){
+      console.log("cleanup inside second useEffect"); //except for the first time, called everytime to cleanup previous value
+    }
+  },[props.count,props.count2]);
+  return <div>
+    <h1>Counter1 {props.count}</h1>
+    <h1>Counter2 {props.count2}</h1>
+  </div>
+}
