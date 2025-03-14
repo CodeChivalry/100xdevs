@@ -1,0 +1,29 @@
+import {useState,useEffect} from "react";
+export default function App(){
+  const [count,setCount]=useState(0);
+  function increase(){
+    setCount(count+1);
+  }
+  return <div>
+    <b>
+      hi there
+    </b>
+  <Counter count={count}></Counter>
+  <button onClick={increase}>Increase Count</button>
+  </div>
+}
+// mounting
+function Counter(props){
+  useEffect(function(){
+    console.log("mount");
+    return function(){
+      console.log("unmount");
+    }
+  },[]);
+  useEffect(function(){
+    console.log("count has changed");
+  },[props.count]);
+  return <div>
+    <h1>{props.count}</h1>
+  </div>
+}
