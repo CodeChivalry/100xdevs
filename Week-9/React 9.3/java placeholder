@@ -2,14 +2,16 @@ import {useState,useEffect} from "react";
 function App(){
   const [currentTab,setCurrentTab]=useState(1);
   const [tabData,setTabData]=useState({});
+  const [loading,setLoading]=useState(true);
   useEffect(function(){
     //send a backend request to get data for this tab
+    setLoading(true);
     console.log("get backend data for tab"+currentTab)
     fetch("https://jsonplaceholder.typicode.com/todos/"+currentTab).then(async res => {
       const json= await res.json();
       setTabData(json);
+      setLoading(false);
     });
-    console.log(tabData.title)
   },[currentTab])
   return <div>
     <button onClick={function(){
@@ -20,7 +22,7 @@ function App(){
       setCurrentTab(3)}} style={{color:currentTab==3?"red":"black"}}>3</button>
     <button onClick={function(){
       setCurrentTab(4)}} style={{color:currentTab==4?"red":"black"}}>4</button>
-
+    {loading?"Loading....":tabData.title}
   </div>
 }
 export default App
