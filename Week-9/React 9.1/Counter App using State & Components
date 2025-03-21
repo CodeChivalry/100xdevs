@@ -1,0 +1,36 @@
+<html>
+<body>
+    <div id="buttonParent">
+
+    </div>
+    <script>
+        //state initialization
+        let state={
+            count:0
+        }
+        function onButtonPress(){
+            state.count++;
+            Buttonrerender(); //handled by react
+        } 
+        //handled by react
+        function Buttonrerender(){
+            //remove the div
+            console.log("inside button re-render");
+            document.getElementById("buttonParent").innerHTML="";
+            //create a new button
+            const component=buttonComponent(state.count);
+            //dom manipulation
+            document.getElementById("buttonParent").appendChild(component);
+        }
+        //we define this as developers using simpler jsx syntax
+        function buttonComponent(count){
+            const button=document.createElement("button");
+            button.innerHTML="Counter "+count;
+            button.setAttribute("onclick", "onButtonPress()");
+            return button;
+            //returns a <button></button>
+        }
+        Buttonrerender();
+    </script>
+</body>
+</html>
