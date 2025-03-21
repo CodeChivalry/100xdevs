@@ -1,0 +1,39 @@
+<html>
+<body>
+    <div id="buttonParent">
+
+    </div>
+    <script>
+        //state initialization
+        let state={
+            count:0,
+            color:"blue"
+        }
+        function onButtonPress(){
+            state.count++;
+            state.color=Math.random()>0.5?"red":"yellow";
+            Buttonrerender(); //handled by react
+        } 
+        //handled by react
+        function Buttonrerender(){
+            //remove the div
+            console.log("inside button re-render");
+            document.getElementById("buttonParent").innerHTML="";
+            //create a new button
+            const component=buttonComponent(state.count,state.color);
+            //dom manipulation
+            document.getElementById("buttonParent").appendChild(component);
+        }
+        //we define this as developers using simpler jsx syntax
+        function buttonComponent(count,color){
+            const button=document.createElement("button");
+            button.innerHTML="Counter "+count;
+            button.setAttribute("onclick", "onButtonPress()");
+            button.setAttribute("style","background-color: "+color);
+            return button; 
+            //returns a <button></button>
+        }
+        Buttonrerender();
+    </script>
+</body>
+</html>
