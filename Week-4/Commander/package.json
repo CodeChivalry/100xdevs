@@ -15,8 +15,6 @@
     "commander": "^13.1.0"
   },
   "bin": {
-  "counter": "./cli.js"
+    "counter": "./cli.js"
   }
-
 }
-
